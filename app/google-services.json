@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "56435198350",
+    "firebase_url": "https://chataround-aa90d.firebaseio.com",
+    "project_id": "chataround-aa90d",
+    "storage_bucket": "chataround-aa90d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56435198350:android:1f8eeaffdd803568403cdf",
+        "android_client_info": {
+          "package_name": "unipi.dionisis98.chataround"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56435198350-p982ihihnh307p22stk59da9cqu27jmf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "unipi.dionisis98.chataround",
+            "certificate_hash": "0cd579a5ed33aaf755670f44684be2671ec83b6e"
+          }
+        },
+        {
+          "client_id": "56435198350-fcugd194nk2gugo5ppvs9jddpi6o1k5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGiQczK8wBlrfd50MAJl1jfi5rVctNXkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56435198350-fcugd194nk2gugo5ppvs9jddpi6o1k5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

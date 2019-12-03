@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ChatAround</string>
+    <string name="please_wait_while_your_account_is_being_created">Please wait while your account is being created</string>
+    <string name="log_in_with_existing_account">Log In with existing account</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="please_wait_while_we_check_your_credentials">Please wait while we check your credentials</string>
+</resources>
