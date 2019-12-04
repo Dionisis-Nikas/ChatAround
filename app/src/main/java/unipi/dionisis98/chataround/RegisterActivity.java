@@ -21,10 +21,15 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -35,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private TextView progressText;
+    private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,17 +78,43 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void registerUser(String username, final String email, final String password){
+    private void registerUser(final String username, final String email, final String password){
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                    //updateUI(user);
+
+                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                    String uid = current_user.getUid().toString();
+
+                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+
+                    HashMap<String,String> userMap = new HashMap<>();
+                    userMap.put("name",username);
+                    userMap.put("status","Hi there lets chat");
+                    userMap.put("image","default");
+                    userMap.put("thumbImage","default");
+
+                    databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                // Sign in success, update UI with the signed-in user's information
+                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+                                //updateUI(user);
+
+                            }
+                            else {
+                                showMessage("Error","Database connection failed");
+                            }
+                        }
+                    });
+
+
                 } else {
                     // If sign in fails, display a message to the user.
                     FirebaseAuthException e = (FirebaseAuthException)task.getException();

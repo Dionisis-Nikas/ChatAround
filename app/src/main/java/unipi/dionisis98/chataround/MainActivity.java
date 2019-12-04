@@ -3,19 +3,25 @@ package unipi.dionisis98.chataround;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewParent;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private ViewPager viewPager;
+    private SectionsPagerAdapter sectionsPagerAdapter;
+    private TabLayout tabLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         getSupportActionBar().setTitle("ChatAround");
 
+        tabLayout = findViewById(R.id.tabs);
+        viewPager = findViewById(R.id.view_pager_main);
+        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        viewPager.setAdapter(sectionsPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
