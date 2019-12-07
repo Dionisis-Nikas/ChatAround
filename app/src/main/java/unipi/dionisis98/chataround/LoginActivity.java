@@ -71,8 +71,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 if (task.isSuccessful()) {
+
                     // Sign in success, update UI with the signed-in user's information
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    intent.putExtra("user",mAuth.getCurrentUser().getUid().toString());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();

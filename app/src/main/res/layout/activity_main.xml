@@ -6,30 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.tabs.TabLayout
+    <TextView
+        android:id="@+id/discTopicsLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabs">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Monday" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tuesday" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Wednesday" />
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_main"
+        android:text="@string/discussion_topics"
+        android:textColor="@color/colorPrimary"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:paddingTop="10dp"
+        />
+    <TextView
+        android:id="@+id/chooseLabel"
+        android:layout_below="@id/discTopicsLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tabs" />
+        android:layout_centerHorizontal="true"
+        android:text="Please select the chat room with the prefered topic"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        android:paddingTop="15dp"
+        android:paddingLeft="10dp"
+        />
+
+    <ListView
+        android:layout_below="@+id/chooseLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/discTopicsListView"
+        />
 </RelativeLayout>

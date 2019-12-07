@@ -82,7 +82,10 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                progressBar.setVisibility(View.VISIBLE);
+                progressText.setVisibility(View.VISIBLE);
                 if (task.isSuccessful()) {
 
                     FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
@@ -102,6 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 // Sign in success, update UI with the signed-in user's information
                                 Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                intent.putExtra("user",mAuth.getCurrentUser().getUid().toString());
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
